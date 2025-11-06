@@ -1,235 +1,30 @@
-/* =============================
-   STYLE DASAR
-============================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+// Smooth scroll saat klik link navigasi
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Animasi fade-in saat scroll
+const fadeElements = document.querySelectorAll('section');
+
+function fadeInOnScroll() {
+    fadeElements.forEach(el => {
+        const position = el.getBoundingClientRect().top;
+        if (position < window.innerHeight - 100) {
+            el.classList.add('fade-in');
+        }
+    });
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
-    line-height: 1.6;
-}
+window.addEventListener('scroll', fadeInOnScroll);
 
-/* =============================
-   HEADER & NAVBAR
-============================= */
-header {
-    background-color: #2e8b57;
-    color: #fff;
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #ffeb3b;
-}
-
-/* =============================
-   HERO SECTION
-============================= */
-.hero {
-    height: 90vh;
-    background: url("assets/images/puncak%20tampomas.jpg") center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    position: relative;
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    padding: 20px;
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-.cta-btn {
-    display: inline-block;
-    background-color: #ffeb3b;
-    color: #333;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.cta-btn:hover {
-    background-color: #f1c40f;
-}
-
-/* =============================
-   SECTION UMUM
-============================= */
-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #2e8b57;
-}
-
-/* =============================
-   INFO SECTION
-============================= */
-.info {
-    background-color: #fff;
-    max-width: 900px;
-    margin: auto;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* =============================
-   GALERI
-============================= */
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    max-width: 1000px;
-    margin: auto;
-}
-
-.gallery-container img {
-    width: 100%;
-    border-radius: 10px;
-    height: 250px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-container img:hover {
-    transform: scale(1.05);
-}
-
-/* =============================
-   KONTAK FORM
-============================= */
-.contact form {
-    max-width: 500px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact input, 
-.contact textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: inherit;
-}
-
-.contact button {
-    background-color: #2e8b57;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.contact button:hover {
-    background-color: #246b45;
-}
-
-/* =============================
-   FOOTER
-============================= */
-footer {
-    background-color: #2e8b57;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-}
-
-/* =============================
-   RESPONSIVE DESIGN
-============================= */
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-        background: #246b45;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        display: none;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .navbar {
-        flex-direction: column;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-}
+// Efek alert saat submit form
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Pesan kamu berhasil dikirim! Terima kasih sudah menghubungi kami.');
+    form.reset();
+});
